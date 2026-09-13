@@ -60,12 +60,22 @@ export default function Home() {
     const activeTheme = savedSettings.theme || 'light';
     setCurrentTheme(activeTheme);
     document.documentElement.setAttribute('data-theme', activeTheme);
+    if (activeTheme === 'dark' || activeTheme === 'cyberpunk') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     setStats(getAppStats());
   }, []);
 
   const handleSelectTheme = (newTheme: AppTheme) => {
     setCurrentTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
+    if (newTheme === 'dark' || newTheme === 'cyberpunk') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     const updatedSettings = { ...settings, theme: newTheme };
     setSettings(updatedSettings);
     saveAppSettings(updatedSettings);

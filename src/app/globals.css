@@ -139,12 +139,10 @@ body {
 
 /* Drag & Drop Zone in Light Mode */
 [data-theme="light"] .border-dashed {
-  background-color: #ffffff !important;
   border-color: #cbd5e1 !important;
 }
 
 [data-theme="light"] .border-dashed:hover {
-  background-color: #f8fafc !important;
   border-color: #6366f1 !important;
 }
 
