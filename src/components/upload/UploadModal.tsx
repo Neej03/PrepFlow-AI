@@ -10,7 +10,8 @@ import {
   Target, 
   Layers, 
   AlertCircle,
-  FileCheck
+  FileCheck,
+  Check
 } from 'lucide-react';
 import { Subject, StudyLevel, StudyGoal, PersonalizationSettings } from '@/types';
 
@@ -165,36 +166,50 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               />
               
               {selectedFile ? (
-                /* Selected File Card - High Contrast & Clear Layout */
-                <div className="rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/40 dark:bg-slate-950/80 p-6 text-center shadow-xs transition">
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-700 dark:text-emerald-400 shadow-xs mb-3">
-                    <FileCheck className="w-7 h-7" />
-                  </div>
-                  
-                  {/* High Contrast Visible File Name */}
-                  <div className="font-black text-slate-900 dark:text-white text-base truncate max-w-md mx-auto tracking-tight mb-1.5">
-                    {selectedFile.name}
-                  </div>
-                  
-                  <div className="text-xs font-semibold text-slate-600 dark:text-slate-300 flex items-center justify-center space-x-2 mb-4">
-                    <span>{(selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
-                    <span>•</span>
-                    <span className="text-emerald-800 dark:text-emerald-300 font-bold bg-emerald-100 dark:bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-500/30">
-                      Ready for AI analysis
-                    </span>
-                  </div>
+                /* Selected File Card - Sleek Executive Horizontal Card */
+                <div className="relative overflow-hidden rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-gradient-to-r from-emerald-50/80 via-slate-50 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 p-5 shadow-xs transition-all duration-200">
+                  <div className="flex items-center justify-between gap-4">
+                    {/* File Icon & Info */}
+                    <div className="flex items-center space-x-4 min-w-0">
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 shrink-0 shadow-xs">
+                        <FileCheck className="w-6 h-6" />
+                      </div>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedFile(null);
-                    }}
-                    className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30 text-xs font-bold transition cursor-pointer"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                    <span>Remove file</span>
-                  </button>
+                      <div className="min-w-0 space-y-1">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-black text-slate-900 dark:text-white text-base truncate tracking-tight">
+                            {selectedFile.name}
+                          </span>
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 shrink-0">
+                            {selectedFile.name.split('.').pop()?.toUpperCase() || 'FILE'}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center space-x-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                          <span>{(selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
+                          <span>•</span>
+                          <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center space-x-1">
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Ready for AI analysis</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Remove Button */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedFile(null);
+                      }}
+                      className="px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30 text-xs font-bold transition flex items-center space-x-1.5 shrink-0 cursor-pointer"
+                      title="Remove selected file"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                      <span>Remove</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 /* Unselected Drag & Drop Area */
@@ -202,16 +217,25 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleFileDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className="cursor-pointer rounded-2xl border-2 border-dashed border-indigo-200 hover:border-indigo-500 dark:border-slate-800 dark:hover:border-indigo-400 bg-indigo-50/40 hover:bg-indigo-50/80 dark:bg-slate-950/50 dark:hover:bg-slate-950 p-8 text-center transition group shadow-xs"
+                  className="cursor-pointer rounded-2xl border-2 border-dashed border-indigo-200 hover:border-indigo-500 dark:border-slate-800 dark:hover:border-indigo-400 bg-gradient-to-b from-indigo-50/40 via-white to-purple-50/20 dark:from-slate-950/60 dark:to-slate-900/40 p-8 text-center transition group shadow-xs hover:shadow-md"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-indigo-100/80 dark:bg-indigo-500/15 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform mb-3">
+                  <div className="w-14 h-14 rounded-2xl bg-indigo-100/80 dark:bg-indigo-500/15 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform mb-3 shadow-xs">
                     <UploadCloud className="w-7 h-7" />
                   </div>
-                  <div className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight mb-1">
+                  <div className="font-black text-slate-900 dark:text-white text-base tracking-tight mb-1">
                     Click to browse or drag document here
                   </div>
-                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-4">
                     Supports PDF, DOCX, PPTX, and TXT up to 20MB
+                  </div>
+
+                  {/* Format Badges */}
+                  <div className="flex items-center justify-center space-x-2">
+                    {['PDF', 'DOCX', 'PPTX', 'TXT'].map((ext) => (
+                      <span key={ext} className="text-[10px] font-black tracking-wider px-2.5 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-xs">
+                        {ext}
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
@@ -305,7 +329,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-extrabold shadow-lg shadow-indigo-600/30 flex items-center space-x-2 transition transform hover:-translate-y-0.5 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-white" />
-              <span>Generate Notes & Quiz</span>
+              <span className="text-white">Generate Notes & Quiz</span>
             </button>
           </div>
         </form>
