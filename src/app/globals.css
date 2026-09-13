@@ -152,6 +152,9 @@ button.bg-purple-600 svg {
 /* All Dark Obsidian Typography Overrides */
 [data-theme="dark"] .text-white,
 [data-theme="dark"] .text-slate-100,
+[data-theme="dark"] .text-slate-900,
+[data-theme="dark"] .text-slate-800,
+[data-theme="dark"] .text-slate-700,
 [data-theme="dark"] h1,
 [data-theme="dark"] h2,
 [data-theme="dark"] h3 {
@@ -367,11 +370,18 @@ button.bg-purple-600 svg {
 }
 
 /* High-Contrast Cyberpunk Text */
+[data-theme="cyberpunk"] .text-slate-900,
+[data-theme="cyberpunk"] .text-slate-800,
+[data-theme="cyberpunk"] .text-slate-700,
 [data-theme="cyberpunk"] .text-slate-100,
-[data-theme="cyberpunk"] .text-slate-200 {
+[data-theme="cyberpunk"] .text-slate-200,
+[data-theme="cyberpunk"] h1,
+[data-theme="cyberpunk"] h2,
+[data-theme="cyberpunk"] h3 {
   color: #ffffff !important;
 }
 
+[data-theme="cyberpunk"] .text-slate-600,
 [data-theme="cyberpunk"] .text-slate-300 {
   color: #f5f3ff !important;
 }
@@ -381,7 +391,7 @@ button.bg-purple-600 svg {
 }
 
 [data-theme="cyberpunk"] .text-slate-500 {
-  color: #a855f7 !important;
+  color: #c084fc !important;
 }
 
 @media print {
