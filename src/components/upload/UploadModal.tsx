@@ -95,14 +95,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md overflow-y-auto">
       <div 
-        className="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden my-8 transition-colors duration-200"
+        className="relative w-full max-w-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden my-8 transition-colors duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800/80 bg-white dark:bg-slate-900">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
           <div className="flex items-center space-x-3.5">
             <div className="h-11 w-11 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400 shadow-xs shrink-0">
-              <Sparkles className="w-5.5 h-5.5" />
+              <Sparkles className="w-5.5 h-5.5 text-indigo-600 dark:text-indigo-400" />
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">Upload Study Material</h2>
@@ -120,7 +120,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Mode Switcher */}
-          <div className="flex p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80">
+          <div className="flex p-1.5 rounded-2xl bg-slate-100/80 dark:bg-slate-950/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80">
             <button
               type="button"
               onClick={() => setActiveTab('file')}
@@ -166,13 +166,13 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               />
               
               {selectedFile ? (
-                /* Selected File Card - Sleek Executive Horizontal Card */
-                <div className="relative overflow-hidden rounded-2xl border border-emerald-200 dark:border-emerald-500/30 bg-gradient-to-r from-emerald-50/80 via-slate-50 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 p-5 shadow-xs transition-all duration-200">
+                /* Selected File Card - Translucent Glass Card with High Contrast Typography */
+                <div className="relative overflow-hidden rounded-2xl border border-emerald-500/30 dark:border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-500/15 backdrop-blur-md p-5 shadow-sm transition-all duration-200">
                   <div className="flex items-center justify-between gap-4">
                     {/* File Icon & Info */}
                     <div className="flex items-center space-x-4 min-w-0">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-500/15 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 shrink-0 shadow-xs">
-                        <FileCheck className="w-6 h-6" />
+                      <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 shadow-xs">
+                        <FileCheck className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                       </div>
 
                       <div className="min-w-0 space-y-1">
@@ -180,16 +180,16 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                           <span className="font-black text-slate-900 dark:text-white text-base truncate tracking-tight">
                             {selectedFile.name}
                           </span>
-                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 shrink-0">
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 shrink-0">
                             {selectedFile.name.split('.').pop()?.toUpperCase() || 'FILE'}
                           </span>
                         </div>
 
-                        <div className="flex items-center space-x-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-                          <span>{(selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
-                          <span>•</span>
-                          <span className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center space-x-1">
-                            <Check className="w-3.5 h-3.5" />
+                        <div className="flex items-center space-x-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+                          <span className="text-slate-700 dark:text-slate-300">{(selectedFile.size / (1024 * 1024)).toFixed(2)} MB</span>
+                          <span className="text-slate-400">•</span>
+                          <span className="text-emerald-800 dark:text-emerald-400 font-extrabold flex items-center space-x-1">
+                            <Check className="w-3.5 h-3.5 text-emerald-800 dark:text-emerald-400" />
                             <span>Ready for AI analysis</span>
                           </span>
                         </div>
@@ -203,23 +203,23 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                         e.stopPropagation();
                         setSelectedFile(null);
                       }}
-                      className="px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-500/10 dark:hover:bg-rose-500/20 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/30 text-xs font-bold transition flex items-center space-x-1.5 shrink-0 cursor-pointer"
+                      className="px-3.5 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-xs font-black transition flex items-center space-x-1.5 shrink-0 cursor-pointer"
                       title="Remove selected file"
                     >
-                      <X className="w-3.5 h-3.5" />
+                      <X className="w-3.5 h-3.5 text-rose-700 dark:text-rose-300" />
                       <span>Remove</span>
                     </button>
                   </div>
                 </div>
               ) : (
-                /* Unselected Drag & Drop Area */
+                /* Unselected Drag & Drop Area - Translucent Glass Dropzone */
                 <div
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleFileDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className="cursor-pointer rounded-2xl border-2 border-dashed border-indigo-200 hover:border-indigo-500 dark:border-slate-800 dark:hover:border-indigo-400 bg-gradient-to-b from-indigo-50/40 via-white to-purple-50/20 dark:from-slate-950/60 dark:to-slate-900/40 p-8 text-center transition group shadow-xs hover:shadow-md"
+                  className="cursor-pointer rounded-2xl border-2 border-dashed border-indigo-300/80 hover:border-indigo-500 dark:border-slate-800 dark:hover:border-indigo-400 bg-indigo-500/5 hover:bg-indigo-500/10 dark:bg-slate-950/40 dark:hover:bg-slate-950/60 backdrop-blur-sm p-8 text-center transition group shadow-xs hover:shadow-md"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-indigo-100/80 dark:bg-indigo-500/15 border border-indigo-200 dark:border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform mb-3 shadow-xs">
+                  <div className="w-14 h-14 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform mb-3 shadow-xs">
                     <UploadCloud className="w-7 h-7" />
                   </div>
                   <div className="font-black text-slate-900 dark:text-white text-base tracking-tight mb-1">
@@ -232,7 +232,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   {/* Format Badges */}
                   <div className="flex items-center justify-center space-x-2">
                     {['PDF', 'DOCX', 'PPTX', 'TXT'].map((ext) => (
-                      <span key={ext} className="text-[10px] font-black tracking-wider px-2.5 py-0.5 rounded-md bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-xs">
+                      <span key={ext} className="text-[10px] font-black tracking-wider px-2.5 py-0.5 rounded-md bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-xs backdrop-blur-xs">
                         {ext}
                       </span>
                     ))}
