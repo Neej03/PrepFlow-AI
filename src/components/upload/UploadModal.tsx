@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   X, 
   UploadCloud, 
@@ -11,9 +11,11 @@ import {
   Layers, 
   AlertCircle,
   FileCheck,
-  Check
+  Check,
+  Globe
 } from 'lucide-react';
-import { Subject, StudyLevel, StudyGoal, PersonalizationSettings } from '@/types';
+import { Subject, StudyLevel, StudyGoal, PersonalizationSettings, AppLanguage } from '@/types';
+import { t, SUPPORTED_LANGUAGES } from '@/lib/i18n';
 
 interface UploadModalProps {
   isOpen: boolean;
@@ -25,6 +27,7 @@ interface UploadModalProps {
     customApiKey?: string
   ) => void;
   savedApiKey?: string;
+  currentLanguage?: AppLanguage;
 }
 
 export const UploadModal: React.FC<UploadModalProps> = ({
@@ -32,6 +35,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   onClose,
   onSubmitUpload,
   savedApiKey = '',
+  currentLanguage = 'en',
 }) => {
   const [activeTab, setActiveTab] = useState<'file' | 'text'>('file');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -41,8 +45,13 @@ export const UploadModal: React.FC<UploadModalProps> = ({
   const [subject, setSubject] = useState<Subject>('Computer Science');
   const [studyLevel, setStudyLevel] = useState<StudyLevel>('Intermediate');
   const [studyGoal, setStudyGoal] = useState<StudyGoal>('Exam Preparation');
+  const [language, setLanguage] = useState<AppLanguage>(currentLanguage);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setLanguage(currentLanguage);
+  }, [currentLanguage]);
 
   if (!isOpen) return null;
 
@@ -88,7 +97,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
     onSubmitUpload(
       activeTab === 'file' ? selectedFile : null,
       activeTab === 'text' ? pastedText : '',
-      { subject, studyLevel, studyGoal }
+      { subject, studyLevel, studyGoal, language }
     );
   };
 
@@ -105,8 +114,8 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <Sparkles className="w-5.5 h-5.5 text-indigo-600 dark:text-indigo-400" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">Upload Study Material</h2>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">Select lecture content & personalization goal</p>
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">{t('uploadModalTitle', language)}</h2>
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">{t('uploadModalSub', language)}</p>
             </div>
           </div>
           <button
@@ -131,7 +140,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               }`}
             >
               <UploadCloud className="w-4 h-4" />
-              <span>Upload Document</span>
+              <span>{t('uploadDocTab', language)}</span>
             </button>
             <button
               type="button"
@@ -143,7 +152,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               }`}
             >
               <FileText className="w-4 h-4" />
-              <span>Paste Text / Notes</span>
+              <span>{t('pasteTextTab', language)}</span>
             </button>
           </div>
 
@@ -190,7 +199,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                           <span className="text-slate-400">•</span>
                           <span className="text-emerald-800 dark:text-emerald-400 font-extrabold flex items-center space-x-1">
                             <Check className="w-3.5 h-3.5 text-emerald-800 dark:text-emerald-400" />
-                            <span>Ready for AI analysis</span>
+                            <span>{t('readyForAi', language)}</span>
                           </span>
                         </div>
                       </div>
@@ -207,7 +216,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                       title="Remove selected file"
                     >
                       <X className="w-3.5 h-3.5 text-rose-700 dark:text-rose-300" />
-                      <span>Remove</span>
+                      <span>{t('removeBtn', language)}</span>
                     </button>
                   </div>
                 </div>
@@ -223,10 +232,10 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     <UploadCloud className="w-7 h-7" />
                   </div>
                   <div className="font-black text-slate-900 dark:text-white text-base tracking-tight mb-1">
-                    Click to browse or drag document here
+                    {t('dragDropText', language)}
                   </div>
                   <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-4">
-                    Supports PDF, DOCX, PPTX, and TXT up to 20MB
+                    {t('supportsText', language)}
                   </div>
 
                   {/* Format Badges */}
@@ -245,8 +254,8 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <textarea
                 value={pastedText}
                 onChange={(e) => setPastedText(e.target.value)}
-                placeholder="Paste your lecture transcript, textbook summary, or raw study notes here..."
-                className="w-full h-44 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 text-xs sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-none font-mono font-medium shadow-xs transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                placeholder={t('pastePlaceholder', language)}
+                className="w-full h-44 p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 text-xs sm:text-sm focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-none font-mono font-medium shadow-xs transition placeholder:text-slate-400 dark:placeholder:text-slate-500"
               />
             </div>
           )}
@@ -255,15 +264,15 @@ export const UploadModal: React.FC<UploadModalProps> = ({
           <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
             <div className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center space-x-1.5">
               <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
-              <span>AI Personalization Settings</span>
+              <span>{t('aiSettings', language)}</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
               {/* Subject */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center space-x-1">
                   <BookOpen className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Subject</span>
+                  <span>{t('subjectLabel', language)}</span>
                 </label>
                 <select
                   value={subject}
@@ -283,7 +292,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center space-x-1">
                   <Layers className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Study Level</span>
+                  <span>{t('studyLevelLabel', language)}</span>
                 </label>
                 <select
                   value={studyLevel}
@@ -300,7 +309,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center space-x-1">
                   <Target className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Study Goal</span>
+                  <span>{t('studyGoalLabel', language)}</span>
                 </label>
                 <select
                   value={studyGoal}
@@ -310,6 +319,25 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   <option value="Quick Revision">Quick Revision</option>
                   <option value="Exam Preparation">Exam Preparation</option>
                   <option value="Deep Understanding">Deep Understanding</option>
+                </select>
+              </div>
+
+              {/* Target Language */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 flex items-center space-x-1">
+                  <Globe className="w-3.5 h-3.5 text-indigo-500" />
+                  <span>{t('targetLangLabel', language)}</span>
+                </label>
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value as AppLanguage)}
+                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 text-xs font-bold focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 shadow-xs cursor-pointer"
+                >
+                  {SUPPORTED_LANGUAGES.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -322,14 +350,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               onClick={onClose}
               className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold transition border border-slate-200 dark:border-slate-700 cursor-pointer"
             >
-              Cancel
+              {t('cancelBtn', language)}
             </button>
             <button
               type="submit"
               className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-extrabold shadow-lg shadow-indigo-600/30 flex items-center space-x-2 transition transform hover:-translate-y-0.5 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-white" />
-              <span className="text-white">Generate Notes & Quiz</span>
+              <span className="text-white">{t('generateBtn', language)}</span>
             </button>
           </div>
         </form>

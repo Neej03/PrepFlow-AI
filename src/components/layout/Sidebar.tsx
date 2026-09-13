@@ -10,12 +10,16 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import { AppLanguage } from '@/types';
+import { t } from '@/lib/i18n';
+
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onOpenUpload: () => void;
   materialsCount: number;
   avgScore: number;
+  currentLanguage?: AppLanguage;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -24,13 +28,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenUpload,
   materialsCount,
   avgScore,
+  currentLanguage = 'en',
 }) => {
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'upload', label: 'Upload Material', icon: UploadCloud, action: onOpenUpload },
-    { id: 'history', label: 'My Materials', icon: BookOpen, badge: materialsCount ? String(materialsCount) : undefined },
-    { id: 'quizzes', label: 'Practice Quizzes', icon: HelpCircle },
-    { id: 'progress', label: 'Progress Analytics', icon: TrendingUp },
+    { id: 'dashboard', label: t('dashboard', currentLanguage), icon: LayoutDashboard },
+    { id: 'upload', label: t('uploadBtn', currentLanguage), icon: UploadCloud, action: onOpenUpload },
+    { id: 'history', label: t('history', currentLanguage), icon: BookOpen, badge: materialsCount ? String(materialsCount) : undefined },
+    { id: 'quizzes', label: t('quizzes', currentLanguage), icon: HelpCircle },
+    { id: 'progress', label: t('progress', currentLanguage), icon: TrendingUp },
   ];
 
   return (

@@ -14,8 +14,9 @@ import {
   Loader2,
   ChevronDown
 } from 'lucide-react';
-import { ProcessedMaterial } from '@/types';
+import { ProcessedMaterial, AppLanguage } from '@/types';
 import { motion, AnimatePresence } from 'framer-motion';
+import { t } from '@/lib/i18n';
 
 interface ChatMessage {
   id: string;
@@ -27,6 +28,7 @@ interface ChatMessage {
 interface AIChatbotWidgetProps {
   currentMaterial?: ProcessedMaterial | null;
   customApiKey?: string;
+  currentLanguage?: AppLanguage;
 }
 
 const SUGGESTIONS = [
@@ -39,6 +41,7 @@ const SUGGESTIONS = [
 export const AIChatbotWidget: React.FC<AIChatbotWidgetProps> = ({
   currentMaterial,
   customApiKey,
+  currentLanguage = 'en',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -94,7 +97,8 @@ export const AIChatbotWidget: React.FC<AIChatbotWidgetProps> = ({
             keyConcepts: currentMaterial.notes.keyConcepts,
             definitions: currentMaterial.notes.definitions,
           } : undefined,
-          customApiKey
+          customApiKey,
+          language: currentLanguage
         })
       });
 

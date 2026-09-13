@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       subject: (formData.get('subject') as any) || 'Computer Science',
       studyLevel: (formData.get('studyLevel') as any) || 'Intermediate',
       studyGoal: (formData.get('studyGoal') as any) || 'Exam Preparation',
+      language: (formData.get('language') as any) || 'en',
     };
 
     if (isDemo) {

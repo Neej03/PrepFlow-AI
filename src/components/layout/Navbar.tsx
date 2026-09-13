@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Zap } from 'lucide-react';
 import { ThemeSelector } from './ThemeSelector';
-import { AppTheme } from '@/types';
+import { LanguageSelector } from './LanguageSelector';
+import { AppTheme, AppLanguage } from '@/types';
+import { t } from '@/lib/i18n';
 
 interface NavbarProps {
   onOpenUpload: () => void;
@@ -13,6 +15,8 @@ interface NavbarProps {
   avgScore?: number;
   currentTheme: AppTheme;
   onSelectTheme: (theme: AppTheme) => void;
+  currentLanguage: AppLanguage;
+  onSelectLanguage: (lang: AppLanguage) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -23,6 +27,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   avgScore = 0,
   currentTheme,
   onSelectTheme,
+  currentLanguage,
+  onSelectLanguage,
 }) => {
   const [mounted, setMounted] = useState(false);
 
@@ -53,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold hidden sm:block">
-            Turn study material into exam-ready knowledge
+            {t('welcomeSub', currentLanguage)}
           </p>
         </div>
       </div>
@@ -64,15 +70,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           <img src="/logo.png" alt="PrepFlow AI Avatar" className="w-full h-full object-cover" />
         </div>
         <div className="text-left">
-          <div className="text-xs font-black text-slate-900 dark:text-white tracking-tight">PrepFlow AI Workspace</div>
+          <div className="text-xs font-black text-slate-900 dark:text-white tracking-tight">{t('workspace', currentLanguage)}</div>
           <div className="text-[11px] font-bold text-indigo-600 dark:text-sky-400">
-            Avg Score: {mounted ? (avgScore > 0 ? `${avgScore}%` : '53%') : '53%'}
+            {t('avgScore', currentLanguage)}: {mounted ? (avgScore > 0 ? `${avgScore}%` : '53%') : '53%'}
           </div>
         </div>
       </div>
 
       {/* Right Controls */}
       <div className="flex items-center space-x-2 sm:space-x-3">
+        {/* Language Selector */}
+        <LanguageSelector currentLanguage={currentLanguage} onSelectLanguage={onSelectLanguage} />
+
         {/* Theme Selector */}
         <ThemeSelector currentTheme={currentTheme} onSelectTheme={onSelectTheme} />
 
@@ -82,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-bold transition shadow-xs cursor-pointer"
         >
           <Zap className="w-4 h-4 text-amber-500 fill-amber-500/20" />
-          <span>Try Demo</span>
+          <span>{t('tryDemo', currentLanguage)}</span>
         </button>
 
         {/* Primary CTA */}
@@ -91,8 +100,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs sm:text-sm font-extrabold shadow-md shadow-indigo-600/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
         >
           <Sparkles className="w-4 h-4 text-white" />
-          <span className="hidden xs:inline">Upload Material</span>
-          <span className="xs:hidden">Upload</span>
+          <span className="hidden xs:inline">{t('uploadNewLecture', currentLanguage)}</span>
+          <span className="xs:hidden">{t('uploadBtn', currentLanguage)}</span>
         </button>
       </div>
     </header>

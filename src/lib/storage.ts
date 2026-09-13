@@ -13,6 +13,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
   defaultStudyGoal: 'Exam Preparation',
   autoSaveHistory: true,
   theme: 'light',
+  language: 'en',
 };
 
 export function getSavedMaterials(): ProcessedMaterial[] {

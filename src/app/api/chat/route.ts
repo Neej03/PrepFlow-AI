@@ -7,7 +7,12 @@ const DEFAULT_GEMINI_KEY = 'AIzaSyDd1uwMkbkoXoSz_FNlL61NRqxFYSqexC0';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { messages, materialContext, customApiKey } = body;
+    const { messages, materialContext, customApiKey, language = 'en' } = body;
+
+    const langNames: Record<string, string> = {
+      en: 'English', es: 'Spanish', fr: 'French', de: 'German', hi: 'Hindi', zh: 'Chinese'
+    };
+    const targetLang = langNames[language] || 'English';
 
     const apiKey = customApiKey || process.env.GEMINI_API_KEY || DEFAULT_GEMINI_KEY;
 
@@ -23,6 +28,7 @@ Definitions: ${JSON.stringify(materialContext.definitions || [])}
 When relevant, reference concepts from this study material in your answers. But if the student asks any general question outside of this material, answer thoroughly and accurately.` : ''}
 
 CRITICAL RESPONSE STYLE:
+- CRITICAL: Write your entire response in ${targetLang}.
 - Be encouraging, clear, and academically precise.
 - Use bullet points, bold key terms, and code/math blocks where helpful.
 - Keep answers structured and easy to read.`;

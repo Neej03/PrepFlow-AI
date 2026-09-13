@@ -10,10 +10,13 @@ export type StudyLevel = 'Beginner' | 'Intermediate' | 'Advanced';
 
 export type StudyGoal = 'Quick Revision' | 'Exam Preparation' | 'Deep Understanding';
 
+export type AppLanguage = 'en' | 'es' | 'fr' | 'de' | 'hi' | 'zh';
+
 export interface PersonalizationSettings {
   subject: Subject;
   studyLevel: StudyLevel;
   studyGoal: StudyGoal;
+  language?: AppLanguage;
 }
 
 export type PriorityLevel = 'HIGH' | 'MEDIUM' | 'LOW';
@@ -141,4 +144,5 @@ export interface UserSettings {
   defaultStudyGoal: StudyGoal;
   autoSaveHistory: boolean;
   theme: AppTheme;
+  language: AppLanguage;
 }

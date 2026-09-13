@@ -13,8 +13,9 @@ import {
   Trash2, 
   Play
 } from 'lucide-react';
-import { ProcessedMaterial, AppStats } from '@/types';
+import { ProcessedMaterial, AppStats, AppLanguage } from '@/types';
 import { motion } from 'framer-motion';
+import { t } from '@/lib/i18n';
 
 interface DashboardOverviewProps {
   onOpenUpload: () => void;
@@ -24,6 +25,7 @@ interface DashboardOverviewProps {
   onSelectMaterial: (material: ProcessedMaterial) => void;
   onStartQuiz: (material: ProcessedMaterial) => void;
   onDeleteMaterial: (id: string) => void;
+  currentLanguage?: AppLanguage;
 }
 
 export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
@@ -34,6 +36,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
   onSelectMaterial,
   onStartQuiz,
   onDeleteMaterial,
+  currentLanguage = 'en',
 }) => {
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
@@ -64,7 +67,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm shadow-lg shadow-indigo-600/30 transition-all flex items-center space-x-2.5 transform hover:-translate-y-0.5 cursor-pointer"
             >
               <UploadCloud className="w-5 h-5 text-white" />
-              <span>Upload Lecture Material</span>
+              <span>{t('uploadNewLecture', currentLanguage)}</span>
             </button>
 
             <button
@@ -72,7 +75,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
               className="px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold text-sm transition flex items-center space-x-2 cursor-pointer"
             >
               <Zap className="w-4 h-4 text-amber-500 fill-amber-500/20" />
-              <span>See How It Works (Try Demo)</span>
+              <span>{t('tryDemo', currentLanguage)}</span>
             </button>
           </div>
         </div>
@@ -91,10 +94,10 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
         </div>
 
         <h3 className="text-lg font-black text-slate-900 dark:text-white mb-1">
-          Drag & Drop your lecture material here
+          {t('dragDropText', currentLanguage)}
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6 font-semibold">
-          Upload PDF, DOCX, PPTX, or TXT files. PrepFlow AI will automatically generate structured notes & a 5-question practice quiz.
+          {t('supportsText', currentLanguage)}
         </p>
 
         {/* Supported Formats Pills */}
@@ -118,7 +121,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </div>
           <div>
             <div className="text-2xl font-black text-slate-900 dark:text-white">{stats.materialsProcessed}</div>
-            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">Materials Processed</div>
+            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('materialsAnalyzed', currentLanguage)}</div>
           </div>
         </div>
 
@@ -128,7 +131,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
           </div>
           <div>
             <div className="text-2xl font-black text-slate-900 dark:text-white">{stats.quizzesCompleted}</div>
-            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">Quizzes Completed</div>
+            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('quizzesCompleted', currentLanguage)}</div>
           </div>
         </div>
 
@@ -140,7 +143,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
             <div className="text-2xl font-black text-slate-900 dark:text-white">
               {stats.averageScorePercentage > 0 ? `${stats.averageScorePercentage}%` : 'N/A'}
             </div>
-            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">Average Quiz Score</div>
+            <div className="text-xs font-bold text-slate-500 dark:text-slate-400">{t('avgScore', currentLanguage)}</div>
           </div>
         </div>
 

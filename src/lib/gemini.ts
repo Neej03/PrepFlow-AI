@@ -5,13 +5,24 @@ const DEFAULT_GEMINI_KEY = 'AIzaSyDd1uwMkbkoXoSz_FNlL61NRqxFYSqexC0';
 
 // Helper to construct AI System Instructions based on user personalization
 function getSystemPrompt(personalization: PersonalizationSettings): string {
-  const { subject, studyLevel, studyGoal } = personalization;
+  const { subject, studyLevel, studyGoal, language = 'en' } = personalization;
+  const langNames: Record<string, string> = {
+    en: 'English',
+    es: 'Spanish (Español)',
+    fr: 'French (Français)',
+    de: 'German (Deutsch)',
+    hi: 'Hindi (हिन्दी)',
+    zh: 'Chinese (中文)'
+  };
+  const targetLang = langNames[language] || 'English';
+
   return `You are an elite academic professor, university lecturer, and master tutor. 
 Your mission is to analyze raw student study material and transform it into EXHAUSTIVE, DEEPLY DETAILED, HIGHLY READABLE, AND EXAM-READY REVISION NOTES, plus 3 DISTINCT 5-question practice quiz sets.
 
 Target Subject: ${subject}
 Student Proficiency Level: ${studyLevel}
 Study Goal: ${studyGoal}
+OUTPUT LANGUAGE: ${targetLang} (CRITICAL MANDATE: All titles, overviews, key concept names & descriptions, definitions, sub-topic bullet points, exam points, explanations, formulas, quiz questions, multiple choice options, and answers MUST be written entirely in ${targetLang}.)
 
 CRITICAL RULES FOR REVISION NOTES (MAXIMUM DEPTH & ELABORATION):
 1. MAXIMAL DETAIL & ACADEMIC DEPTH: Do NOT write short or superficial summaries. Provide rich, in-depth explanations for every section.

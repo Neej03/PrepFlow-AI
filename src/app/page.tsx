@@ -21,7 +21,8 @@ import {
   AppStats,
   QuizSet,
   QuizQuestion,
-  AppTheme
+  AppTheme,
+  AppLanguage
 } from '@/types';
 import { 
   getSavedMaterials, 
@@ -47,6 +48,7 @@ export default function Home() {
 
   const [settings, setSettings] = useState<UserSettings>(getAppSettings());
   const [currentTheme, setCurrentTheme] = useState<AppTheme>('light');
+  const [currentLanguage, setCurrentLanguage] = useState<AppLanguage>('en');
   const [stats, setStats] = useState<AppStats>({ materialsProcessed: 0, quizzesCompleted: 0, averageScorePercentage: 0, totalStudyMinutes: 0 });
 
   const [processingFileName, setProcessingFileName] = useState<string>('');
@@ -58,7 +60,9 @@ export default function Home() {
     const savedSettings = getAppSettings();
     setSettings(savedSettings);
     const activeTheme = savedSettings.theme || 'light';
+    const activeLang = savedSettings.language || 'en';
     setCurrentTheme(activeTheme);
+    setCurrentLanguage(activeLang);
     document.documentElement.setAttribute('data-theme', activeTheme);
     if (activeTheme === 'dark' || activeTheme === 'cyberpunk') {
       document.documentElement.classList.add('dark');
@@ -77,6 +81,13 @@ export default function Home() {
       document.documentElement.classList.remove('dark');
     }
     const updatedSettings = { ...settings, theme: newTheme };
+    setSettings(updatedSettings);
+    saveAppSettings(updatedSettings);
+  };
+
+  const handleSelectLanguage = (newLang: AppLanguage) => {
+    setCurrentLanguage(newLang);
+    const updatedSettings = { ...settings, language: newLang };
     setSettings(updatedSettings);
     saveAppSettings(updatedSettings);
   };
@@ -274,6 +285,8 @@ export default function Home() {
         avgScore={stats.averageScorePercentage}
         currentTheme={currentTheme}
         onSelectTheme={handleSelectTheme}
+        currentLanguage={currentLanguage}
+        onSelectLanguage={handleSelectLanguage}
       />
 
       <div className="flex-1 flex overflow-hidden">
@@ -286,6 +299,7 @@ export default function Home() {
           onOpenUpload={() => setIsUploadOpen(true)}
           materialsCount={materials.length}
           avgScore={stats.averageScorePercentage}
+          currentLanguage={currentLanguage}
         />
 
         {/* Main Content Workspace (Isolated Scroll Area) */}
@@ -411,6 +425,7 @@ export default function Home() {
       <AIChatbotWidget
         currentMaterial={currentMaterial}
         customApiKey={settings.customApiKey}
+        currentLanguage={currentLanguage}
       />
 
       {/* Upload Modal */}
@@ -419,6 +434,7 @@ export default function Home() {
         onClose={() => setIsUploadOpen(false)}
         onSubmitUpload={handleUploadSubmit}
         savedApiKey={settings.customApiKey}
+        currentLanguage={currentLanguage}
       />
 
       {/* Share Modal */}
