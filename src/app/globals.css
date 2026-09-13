@@ -352,7 +352,8 @@ button.bg-purple-600 svg {
   color: #f5f3ff !important;
 }
 
-[data-theme="cyberpunk"] .bg-slate-900 {
+[data-theme="cyberpunk"] .bg-slate-900,
+[data-theme="cyberpunk"] .bg-white {
   background-color: #170d36 !important;
   color: #f5f3ff !important;
   border-color: #3b1e77 !important;
@@ -365,7 +366,8 @@ button.bg-purple-600 svg {
 }
 
 [data-theme="cyberpunk"] .border-slate-800,
-[data-theme="cyberpunk"] .border-slate-700 {
+[data-theme="cyberpunk"] .border-slate-700,
+[data-theme="cyberpunk"] .border-slate-200 {
   border-color: #4c2896 !important;
 }
 
@@ -394,6 +396,164 @@ button.bg-purple-600 svg {
   color: #c084fc !important;
 }
 
+[data-theme="cyberpunk"] input,
+[data-theme="cyberpunk"] textarea,
+[data-theme="cyberpunk"] select {
+  background-color: #170d36 !important;
+  color: #ffffff !important;
+  border-color: #4c2896 !important;
+}
+
+/* ==========================================================================
+   THEME 4: EMERALD SCHOLAR (Botanical Dark Teal & Mint Glow)
+   ========================================================================== */
+[data-theme="emerald"] {
+  --background: #041c14;
+  --foreground: #ecfdf5;
+}
+
+[data-theme="emerald"] body,
+[data-theme="emerald"] main {
+  background-color: #041c14 !important;
+  color: #ecfdf5 !important;
+}
+
+[data-theme="emerald"] header {
+  background-color: rgba(6, 38, 27, 0.95) !important;
+  border-bottom-color: #105e45 !important;
+  box-shadow: 0 4px 24px -2px rgba(4, 28, 20, 0.6) !important;
+}
+
+[data-theme="emerald"] aside {
+  background-color: #052217 !important;
+  border-right-color: #105e45 !important;
+}
+
+[data-theme="emerald"] .bg-white,
+[data-theme="emerald"] .bg-slate-50,
+[data-theme="emerald"] .bg-slate-100,
+[data-theme="emerald"] .bg-slate-900,
+[data-theme="emerald"] .bg-slate-950 {
+  background-color: #083325 !important;
+  border-color: #126b4f !important;
+  box-shadow: 0 8px 32px -4px rgba(4, 28, 20, 0.4) !important;
+}
+
+[data-theme="emerald"] .bg-slate-800 {
+  background-color: #0e4432 !important;
+  border-color: #198060 !important;
+}
+
+[data-theme="emerald"] .border-slate-800,
+[data-theme="emerald"] .border-slate-700,
+[data-theme="emerald"] .border-slate-200 {
+  border-color: #105e45 !important;
+}
+
+[data-theme="emerald"] .text-slate-900,
+[data-theme="emerald"] .text-slate-800,
+[data-theme="emerald"] .text-slate-700,
+[data-theme="emerald"] .text-slate-100,
+[data-theme="emerald"] .text-slate-200,
+[data-theme="emerald"] h1,
+[data-theme="emerald"] h2,
+[data-theme="emerald"] h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="emerald"] .text-slate-600,
+[data-theme="emerald"] .text-slate-300 {
+  color: #d1fae5 !important;
+}
+
+[data-theme="emerald"] .text-slate-500,
+[data-theme="emerald"] .text-slate-400 {
+  color: #6ee7b7 !important;
+}
+
+[data-theme="emerald"] input,
+[data-theme="emerald"] textarea,
+[data-theme="emerald"] select {
+  background-color: #052217 !important;
+  color: #ffffff !important;
+  border-color: #105e45 !important;
+}
+
+/* ==========================================================================
+   THEME 5: MIDNIGHT AMETHYST (Deep Royal Purple & Violet Aura)
+   ========================================================================== */
+[data-theme="amethyst"] {
+  --background: #110826;
+  --foreground: #faf5ff;
+}
+
+[data-theme="amethyst"] body,
+[data-theme="amethyst"] main {
+  background-color: #110826 !important;
+  color: #faf5ff !important;
+}
+
+[data-theme="amethyst"] header {
+  background-color: rgba(23, 11, 51, 0.95) !important;
+  border-bottom-color: #4c1d95 !important;
+  box-shadow: 0 4px 24px -2px rgba(17, 8, 38, 0.6) !important;
+}
+
+[data-theme="amethyst"] aside {
+  background-color: #160a33 !important;
+  border-right-color: #4c1d95 !important;
+}
+
+[data-theme="amethyst"] .bg-white,
+[data-theme="amethyst"] .bg-slate-50,
+[data-theme="amethyst"] .bg-slate-100,
+[data-theme="amethyst"] .bg-slate-900,
+[data-theme="amethyst"] .bg-slate-950 {
+  background-color: #1d0e42 !important;
+  border-color: #5b21b6 !important;
+  box-shadow: 0 8px 32px -4px rgba(17, 8, 38, 0.5) !important;
+}
+
+[data-theme="amethyst"] .bg-slate-800 {
+  background-color: #271356 !important;
+  border-color: #6d28d9 !important;
+}
+
+[data-theme="amethyst"] .border-slate-800,
+[data-theme="amethyst"] .border-slate-700,
+[data-theme="amethyst"] .border-slate-200 {
+  border-color: #4c1d95 !important;
+}
+
+[data-theme="amethyst"] .text-slate-900,
+[data-theme="amethyst"] .text-slate-800,
+[data-theme="amethyst"] .text-slate-700,
+[data-theme="amethyst"] .text-slate-100,
+[data-theme="amethyst"] .text-slate-200,
+[data-theme="amethyst"] h1,
+[data-theme="amethyst"] h2,
+[data-theme="amethyst"] h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="amethyst"] .text-slate-600,
+[data-theme="amethyst"] .text-slate-300 {
+  color: #faf5ff !important;
+}
+
+[data-theme="amethyst"] .text-slate-500,
+[data-theme="amethyst"] .text-slate-400 {
+  color: #c084fc !important;
+}
+
+[data-theme="amethyst"] input,
+[data-theme="amethyst"] textarea,
+[data-theme="amethyst"] select {
+  background-color: #160a33 !important;
+  color: #ffffff !important;
+  border-color: #4c1d95 !important;
+}
+
 @media print {
   body {
     background: #ffffff !important;
@@ -403,3 +563,4 @@ button.bg-purple-600 svg {
     display: none !important;
   }
 }
+

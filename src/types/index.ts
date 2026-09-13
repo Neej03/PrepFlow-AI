@@ -135,7 +135,7 @@ export interface AppStats {
   totalStudyMinutes: number;
 }
 
-export type AppTheme = 'dark' | 'light' | 'cyberpunk';
+export type AppTheme = 'light' | 'dark' | 'cyberpunk' | 'emerald' | 'amethyst';
 
 export interface UserSettings {
   customApiKey?: string;

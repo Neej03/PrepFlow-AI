@@ -64,7 +64,7 @@ export default function Home() {
     setCurrentTheme(activeTheme);
     setCurrentLanguage(activeLang);
     document.documentElement.setAttribute('data-theme', activeTheme);
-    if (activeTheme === 'dark' || activeTheme === 'cyberpunk') {
+    if (activeTheme !== 'light') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -75,7 +75,7 @@ export default function Home() {
   const handleSelectTheme = (newTheme: AppTheme) => {
     setCurrentTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
-    if (newTheme === 'dark' || newTheme === 'cyberpunk') {
+    if (newTheme !== 'light') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
